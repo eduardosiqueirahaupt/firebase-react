@@ -25,10 +25,6 @@ export const MainPage = () => {
 
   return (
     <div>
-      {console.log(
-        "process.env.REACT_APP_LINK_API",
-        process.env.REACT_APP_NOME_DA_VARIAVEL
-      )}
       <h1>Página de Exibição de Dados</h1>
       <p>
         <strong>E-mail:</strong> {userData?.email}
