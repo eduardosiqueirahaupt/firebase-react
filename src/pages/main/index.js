@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getUserLogged } from "../../db/user";
 import { useFirebaseContext } from "../../context/firebaseContext";
 
@@ -14,18 +14,21 @@ export const MainPage = () => {
   const [userData, setUserData] = useState(initialUserData);
   const { db } = useFirebaseContext();
 
-  const loadPage = async () => {
+  const loadPage = useCallback(async () => {
     const userLogged = await getUserLogged(db);
     setUserData(userLogged);
-  };
+  }, [db]);
 
   useEffect(() => {
     loadPage();
-  }, []);
+  }, [loadPage]);
 
   return (
     <div>
-      {console.log('process.env.REACT_APP_LINK_API', process.env.REACT_APP_NOME_DA_VARIAVEL)}
+      {console.log(
+        "process.env.REACT_APP_LINK_API",
+        process.env.REACT_APP_NOME_DA_VARIAVEL
+      )}
       <h1>Página de Exibição de Dados</h1>
       <p>
         <strong>E-mail:</strong> {userData?.email}
